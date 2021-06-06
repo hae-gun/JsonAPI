@@ -28,7 +28,7 @@ public class JsonController {
 
 	@GetMapping("/test")
 	public BojVo test(){
-		return new BojVo("a","b","c","d");
+		return new BojVo("aa","b","c","d");
 	}
 
 	@GetMapping("/probs/{tier}")
