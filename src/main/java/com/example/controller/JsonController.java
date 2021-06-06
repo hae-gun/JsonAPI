@@ -29,19 +29,7 @@ public class JsonController {
 		this.jpaServices = jpaServices;
 		this.bojService = bojService;
 	}
-//	
-	
-	@GetMapping("/test")
-	public List<TestVo> getAll(TestVo vo) {
-		System.out.println(jpaServices.findAll());
-		return jpaServices.findAll();
-	}
-	
-	@PostMapping("/data")
-	public TestVo addVo(TestVo testVo) {
-		System.out.println(testVo);
-		return jpaServices.insertOne(testVo);
-	}
+
 	@GetMapping("/probs/{tier}")
 	public JSONObject testBoj(@PathVariable String tier) throws FileNotFoundException, IOException, ParseException {
 		return bojService.getJsonData(tier);
