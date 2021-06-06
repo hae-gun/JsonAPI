@@ -26,6 +26,11 @@ public class JsonController {
 		this.bojService = bojService;
 	}
 
+	@GetMapping("/test")
+	public BojVo test(){
+		return new BojVo("a","b","c","d");
+	}
+
 	@GetMapping("/probs/{tier}")
 	public JSONObject testBoj(@PathVariable String tier) throws FileNotFoundException, IOException, ParseException {
 		return bojService.getJsonData(tier);
