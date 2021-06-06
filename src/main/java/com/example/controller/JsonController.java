@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.service.BojService;
-import com.example.service.JpaServices;
 import com.example.vo.BojVo;
-import com.example.vo.TestVo;
 
 @RestController
 @RequestMapping("/boj")
