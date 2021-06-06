@@ -22,11 +22,9 @@ import com.example.vo.TestVo;
 public class JsonController {
 	
 
-	private final JpaServices jpaServices;
 	private final BojService bojService;
-	public JsonController(JpaServices jpaServices,BojService bojService) {
+	public JsonController(BojService bojService) {
 		System.out.println("make JsonController");
-		this.jpaServices = jpaServices;
 		this.bojService = bojService;
 	}
 
