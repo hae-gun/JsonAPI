@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import javax.transaction.Transactional;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -21,7 +23,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import com.example.repository.BojRepository;
+import com.example.repository.ProbTypeRepository;
+import com.example.vo.BojDto;
 import com.example.vo.BojVo;
+import com.example.vo.ProbTypeVo;
 
 @Service
 public class BojService {
@@ -29,9 +34,10 @@ public class BojService {
 	JSONParser parser = new JSONParser();
 
 	private final JpaRepository repository;
-
-	public BojService(BojRepository repository) {
+	private final JpaRepository otherRepo;
+	public BojService(BojRepository repository, ProbTypeRepository otherRepo) {
 		this.repository = repository;
+		this.otherRepo = otherRepo;
 	}
 
 	public JSONObject readJsonFile(String tier) throws FileNotFoundException, IOException, ParseException {
@@ -71,9 +77,16 @@ public class BojService {
 	}
 
 //	@Caching
-	public List<BojVo> searchByTier(String tier) {
+	public List<BojDto> searchByTier(String tier) {
 		String search = "%" + tier.toLowerCase() + "%";
-		return ((BojRepository) repository).findByLevelLike(search);
+		List<BojVo> tmp = ((BojRepository) repository).findByLevelLike(search);
+		
+		List<BojDto> result = new ArrayList<BojDto>();
+		
+		for(BojVo vo:tmp) {
+			result.add(new BojDto(vo.getId(), vo.getLevel(), vo.getName(), vo.getUrl(), null));
+		}
+		return result;
 	}
 
 	public List<BojVo> searchAll() {
@@ -113,9 +126,14 @@ public class BojService {
 		return new BojVo(obj.get("id").toString(), obj.get("level").toString(), obj.get("name").toString(),
 				obj.get("url").toString());
 	}
-
-	public List<BojVo> test() {
-		Optional<List> op = Optional.ofNullable(((BojRepository) repository).findName());
-		return  op.get();
+	@Transactional
+	public List<BojDto> test() {
+		List<BojVo> tmp = searchByName("구구단");
+		BojVo vo = tmp.get(0);
+		List<ProbTypeVo> tmp2 = otherRepo.findAll();
+		
+		vo.setBojProbType(tmp2.get(0));
+		
+		return  tmp;
 	}
 }

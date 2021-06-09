@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.service.BojService;
+import com.example.vo.BojDto;
 import com.example.vo.BojVo;
 
 @RestController
@@ -40,7 +41,7 @@ public class JsonController {
 		return bojService.saveTierData(tier);
 	}
 	@GetMapping("/probArrs/{tier}")
-	public List<BojVo> searchTierData(@PathVariable String tier) throws FileNotFoundException, IOException, ParseException {
+	public List<BojDto> searchTierData(@PathVariable String tier) throws FileNotFoundException, IOException, ParseException {
 		return bojService.searchByTier(tier);
 	}
 	@GetMapping("/probArrs")
@@ -59,4 +60,8 @@ public class JsonController {
 	public List<BojVo> getRandomProb(@PathVariable String tier,@PathVariable int level){
 		return bojService.randomProb(tier,level);
 	}
+	
+	
+	
+	
 }
