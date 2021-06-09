@@ -1,5 +1,8 @@
 package com.example.vo;
 
+import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -19,10 +22,14 @@ import lombok.ToString;
 public class BojVo {
 	@Id
 	@NonNull
+	@Column(name="boj_id")
 	private String id;
 	private String level;
 	private String name;
 	private String url;
+	
+	@OneToMany(mappedBy = "bojVo")
+	private List<BojProbType> bojProbType;
 	
 	public BojVo() {
 		
@@ -60,6 +67,12 @@ public class BojVo {
 	@Override
 	public String toString() {
 		return "BojVo [id=" + id + ", level=" + level + ", name=" + name + ", url=" + url + "]";
+	}
+	public List<BojProbType> getBojProbType() {
+		return bojProbType;
+	}
+	public void setBojProbType(List<BojProbType> bojProbType) {
+		this.bojProbType = bojProbType;
 	}
 	
 	

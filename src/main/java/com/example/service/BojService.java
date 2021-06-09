@@ -4,9 +4,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.json.simple.JSONArray;
@@ -36,10 +39,10 @@ public class BojService {
 		String selectTier = tier.toLowerCase();
 		ClassPathResource resource = new ClassPathResource("/python/tier_" + selectTier + ".json");
 		System.out.println(resource.getURI());
-		// Path path = Paths.get(resource.getURI());
+		 Path path = Paths.get(resource.getURI());
 
-		String source = "/home/chlgprms/crawling/JsonAPI/build/resources/main/python/tier_" + selectTier + ".json";
-		File file = new File(source);
+//		String source = "/home/chlgprms/crawling/JsonAPI/build/resources/main/python/tier_" + selectTier + ".json";
+		File file = new File(path.toUri());
 		return (JSONObject) parser.parse(new FileReader(file));
 	}
 
@@ -109,5 +112,10 @@ public class BojService {
 
 		return new BojVo(obj.get("id").toString(), obj.get("level").toString(), obj.get("name").toString(),
 				obj.get("url").toString());
+	}
+
+	public List<BojVo> test() {
+		Optional<List> op = Optional.ofNullable(((BojRepository) repository).findName());
+		return  op.get();
 	}
 }

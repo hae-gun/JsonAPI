@@ -38,48 +38,71 @@ dependencies {
    // compile ('org.springframework.boot:spring-boot-starter-security')
 	compile fileTree(dir: 'resources', include: ['**/*.json'])
 	//queryDSL
-	implementation 'com.querydsl:querydsl-jpa'
+	implementation 'com.querydsl:querydsl-jpa:4.3.1'
 }
 
 test {
 	useJUnitPlatform()
 }
-/*
-//querydsl 추가 시작
-def querydslDir = "$buildDir/generated/querydsl"
 
+apply plugin: "com.ewerk.gradle.plugins.querydsl"
+
+def queryDslDir = "src/main/generated"
 querydsl {
+    library = "com.querydsl:querydsl-apt::jpa" // 사용할 AnnotationProcesoor 정의
     jpa = true
-    querydslSourcesDir = querydslDir
+    querydslSourcesDir = queryDslDir
 }
-
 sourceSets {
-    main.java.srcDir querydslDir
-}
-
-configurations {
-    querydsl.extendsFrom compileClasspath
+    main {
+        java {
+            srcDir queryDslDir
+        }
+    }
 }
 
 compileQuerydsl {
     options.annotationProcessorPath = configurations.querydsl
-}*/
-configure("querydsl-sample") {
-    apply plugin: "io.spring.dependency-management"
+}
 
-    dependencies {
-        compile("com.querydsl:querydsl-core")
-        compile("com.querydsl:querydsl-jpa")
-
-        annotationProcessor("com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa") // querydsl JPAAnnotationProcessor 사용 지정
-        annotationProcessor("jakarta.persistence:jakarta.persistence-api") // java.lang.NoClassDefFoundError(javax.annotation.Entity) 발생 대응
-        annotationProcessor("jakarta.annotation:jakarta.annotation-api") // java.lang.NoClassDefFoundError (javax.annotation.Generated) 발생 대응
-    }
-
-    
-    // Gradle clean을 하게되면 생성된 generated 아래 Q클래스 파일이 삭제된다
-    clean {
-        delete file('src/main/generated') // 인텔리제이 큐 클래스 경로
-    }
+configurations {
+    /**
+     * 손권남님이 공유해주신 팁 
+     * 아래를 지정하지 않으면, compile 로 걸린 JPA 의존성에 접근하지 못한다.
+     */
+    querydsl.extendsFrom compileClasspath
 }
 //querydsl 추가 끝
+/** QueryDSL Class Generate Script 작성후 gradlew compileQuerydsl 실행하면 Qclass가 생성된다. */
+def generatedJavaSrcDir = 'src/main/generated'
+def queryDslOutput = file(generatedJavaSrcDir)
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java', generatedJavaSrcDir]
+        }
+    }
+}
+
+/** QClass 생성 */
+task generateQueryDSL(type: JavaCompile, group: 'build') {
+    doFirst {
+        delete queryDslOutput
+        queryDslOutput.mkdirs()
+    }
+    source = sourceSets.main.java
+    classpath = configurations.compile
+    destinationDir = queryDslOutput
+    options.compilerArgs = [
+            '-proc:only',
+            '-processor',
+            'com.querydsl.apt.jpa.JPAAnnotationProcessor' // 여기에 각 라이브러리에서 제공하는 annotation processor 를 선언해야함
+    ]
+}
+compileJava.dependsOn(generateQueryDSL)
+
+/** clean 태스크 실행시 QClass 삭제 */
+clean {
+    delete queryDslOutput
+}
