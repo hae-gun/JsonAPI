@@ -9,10 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-import com.example.repository.JdbcAccountRepository;
-import com.example.repository.JdbcTestVoRepository;
 import com.example.repository.TestRepository;
-import com.example.service.JdbcService;
 
 @Configuration
 public class DataSourceConfiguration {
@@ -40,17 +37,17 @@ public class DataSourceConfiguration {
 	public JdbcTemplate jdbcTemplate() {
 		return new JdbcTemplate(dataSource());
 	}
-	@Bean
-	public JdbcAccountRepository jdbcAccountRepository() {
-		return new JdbcAccountRepository(jdbcTemplate());
-	}
-	@Bean
-	public JdbcTestVoRepository testRepository() {
-		return new JdbcTestVoRepository(jdbcTemplate());
-	}
-	
-	@Bean
-	public JdbcService jdbcService() {
-		return new JdbcService(jdbcAccountRepository());
-	}
+//	@Bean
+//	public JdbcAccountRepository jdbcAccountRepository() {
+//		return new JdbcAccountRepository(jdbcTemplate());
+//	}
+//	@Bean
+//	public JdbcTestVoRepository testRepository() {
+//		return new JdbcTestVoRepository(jdbcTemplate());
+//	}
+//	
+//	@Bean
+//	public JdbcService jdbcService() {
+//		return new JdbcService(jdbcAccountRepository());
+//	}
 }

@@ -5,6 +5,7 @@ plugins {
 	// querydsl
 	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 	id 'war'
+	//id "com.ewerk.gradle.plugins.querydsl"
 }
 
 group = 'com.example'
@@ -36,20 +37,21 @@ dependencies {
     implementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '1.3.2'
     implementation 'io.jsonwebtoken:jjwt:0.9.1'
    // compile ('org.springframework.boot:spring-boot-starter-security')
-	compile fileTree(dir: 'resources', include: ['**/*.json'])
+	//compile fileTree(dir: 'resources', include: ['**/*.json'])
 	//queryDSL
 	implementation 'com.querydsl:querydsl-jpa:4.3.1'
+	implementation 'com.querydsl:querydsl-apt:4.3.1'
+	implementation 'com.querydsl:querydsl-core:4.3.1'
 }
 
 test {
 	useJUnitPlatform()
 }
 
-apply plugin: "com.ewerk.gradle.plugins.querydsl"
 
 def queryDslDir = "src/main/generated"
 querydsl {
-    library = "com.querydsl:querydsl-apt::jpa" // 사용할 AnnotationProcesoor 정의
+    library = "com.querydsl:querydsl-apt:4.3.1" // 사용할 AnnotationProcesoor 정의
     jpa = true
     querydslSourcesDir = queryDslDir
 }
@@ -73,7 +75,8 @@ configurations {
     querydsl.extendsFrom compileClasspath
 }
 //querydsl 추가 끝
-/** QueryDSL Class Generate Script 작성후 gradlew compileQuerydsl 실행하면 Qclass가 생성된다. */
+/** QueryDSL Class Generate Script */
+
 def generatedJavaSrcDir = 'src/main/generated'
 def queryDslOutput = file(generatedJavaSrcDir)
 
@@ -86,23 +89,28 @@ sourceSets {
 }
 
 /** QClass 생성 */
+/*
 task generateQueryDSL(type: JavaCompile, group: 'build') {
     doFirst {
         delete queryDslOutput
         queryDslOutput.mkdirs()
     }
+    
     source = sourceSets.main.java
     classpath = configurations.compile
     destinationDir = queryDslOutput
     options.compilerArgs = [
-            '-proc:only',
-            '-processor',
-            'com.querydsl.apt.jpa.JPAAnnotationProcessor' // 여기에 각 라이브러리에서 제공하는 annotation processor 를 선언해야함
+            "-Xlint:unchecked"
+            //'-proc:only',
+            //'-processor',
+            //'com.querydsl.apt.JPAAnnotationProcessor' // 여기에 각 라이브러리에서 제공하는 annotation processor 를 선언해야함
+//            'com.querydsl.apt.hibernate.HibernateAnnotationProcessor' // Hibernate 사용시 해당 Processor 사용
     ]
 }
 compileJava.dependsOn(generateQueryDSL)
 
 /** clean 태스크 실행시 QClass 삭제 */
+
 clean {
     delete queryDslOutput
 }

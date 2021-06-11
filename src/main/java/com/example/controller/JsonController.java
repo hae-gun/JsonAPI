@@ -28,7 +28,7 @@ public class JsonController {
 	}
 
 	@GetMapping("/test")
-	public List test(){
+	public List<BojVo> test(){
 		return bojService.test();
 	}
 
@@ -53,11 +53,11 @@ public class JsonController {
 		return bojService.searchByName(name);
 	}
 	@GetMapping("/random/{tier}")
-	public List<BojVo> getRandomProb(@PathVariable String tier){
+	public List<BojDto> getRandomProb(@PathVariable String tier){
 		return bojService.randomProb(tier,0);
 	}
 	@GetMapping("/random/{tier}/{level}")
-	public List<BojVo> getRandomProb(@PathVariable String tier,@PathVariable int level){
+	public List<BojDto> getRandomProb(@PathVariable String tier,@PathVariable int level){
 		return bojService.randomProb(tier,level);
 	}
 	

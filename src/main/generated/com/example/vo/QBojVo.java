@@ -7,6 +7,7 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
+import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
@@ -18,6 +19,8 @@ public class QBojVo extends EntityPathBase<BojVo> {
     private static final long serialVersionUID = -2000701806L;
 
     public static final QBojVo bojVo = new QBojVo("bojVo");
+
+    public final ListPath<BojProbType, QBojProbType> bojProbType = this.<BojProbType, QBojProbType>createList("bojProbType", BojProbType.class, QBojProbType.class, PathInits.DIRECT2);
 
     public final StringPath id = createString("id");
 

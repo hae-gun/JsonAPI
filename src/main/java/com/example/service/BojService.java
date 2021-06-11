@@ -104,9 +104,9 @@ public class BojService {
 		return ((BojRepository) repository).findByNameLike(search);
 	}
 
-	public List<BojVo> randomProb(String tier, int i) {
+	public List<BojDto> randomProb(String tier, int i) {
 		String level = i != 0 ? tier + i : tier;
-		List allProb = searchByTier(level);
+		List<BojDto> allProb = searchByTier(level);
 
 		Set<Integer> randomGet2 = new HashSet<>();
 
@@ -114,7 +114,7 @@ public class BojService {
 			int index = (int) (Math.random() * allProb.size());
 			randomGet2.add(index);
 		}
-		List result2 = new ArrayList();
+		List<BojDto> result2 = new ArrayList<BojDto>();
 		for (Integer index : randomGet2) {
 			result2.add(allProb.get(index));
 		}
@@ -127,13 +127,13 @@ public class BojService {
 				obj.get("url").toString());
 	}
 	@Transactional
-	public List<BojDto> test() {
-		List<BojVo> tmp = searchByName("구구단");
-		BojVo vo = tmp.get(0);
-		List<ProbTypeVo> tmp2 = otherRepo.findAll();
+	public List<BojVo> test() {
+//		List<BojVo> tmp = searchByName("구구단");
+//		BojVo vo = tmp.get(0);
+//		List<ProbTypeVo> tmp2 = otherRepo.findAll();
+//		
+////		vo.setBojProbType(tmp2.get(0));
 		
-		vo.setBojProbType(tmp2.get(0));
-		
-		return  tmp;
+		return  null;
 	}
 }
