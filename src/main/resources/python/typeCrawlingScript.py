@@ -45,7 +45,7 @@ probUrl = 'https://www.acmicpc.net/problemset'
 html2 = crawling(probUrl,dictList[0]['url'])
 soup2 = BeautifulSoup(html2,'html.parser')
 print(soup2)
-result2 = str(soup.select('body > div.wrapper > div.container.content > div:nth-child(6) > div:nth-child(2) > div > ul > li:last-child > a'))
+result2 = str(soup2.select('body > div.wrapper > div.container.content > div:nth-child(6) > div:nth-child(2) > div > ul > li:last-child > a'))
 print(result2)
 #for i in range(0,2):
     
