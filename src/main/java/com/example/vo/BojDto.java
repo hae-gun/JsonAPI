@@ -1,5 +1,6 @@
 package com.example.vo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BojDto {
@@ -8,16 +9,27 @@ public class BojDto {
 	private String level;
 	private String name;
 	private String url;
-	private List<ProbTypeVo> types;
+	private List<String> types = new ArrayList<String>();
 	public BojDto() {
 	}
-	public BojDto(String id, String level, String name, String url, List<ProbTypeVo> types) {
+	public BojDto(String id, String level, String name, String url) {
 		this.id = id;
 		this.level = level;
 		this.name = name;
 		this.url = url;
-		this.types = types;
+//		this.types = types;
 	}
+	public BojDto(BojVo vo, String type) {
+		this.id = vo.getId();
+		this.level = vo.getLevel();
+		this.name = vo.getName();
+		this.url = vo.getUrl();
+		if(type != null) {
+			this.types.add(type);
+		}
+	}
+	
+	
 	public String getId() {
 		return id;
 	}
@@ -42,12 +54,10 @@ public class BojDto {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public List<ProbTypeVo> getTypes() {
+	public List<String> getTypes() {
 		return types;
 	}
-	public void setTypes(List<ProbTypeVo> types) {
-		this.types = types;
-	}
+	
 	
 	
 }

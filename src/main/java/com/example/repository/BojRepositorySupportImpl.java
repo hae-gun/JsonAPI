@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import org.springframework.stereotype.Repository;
 
 import com.example.vo.BojVo;
-import com.querydsl.core.types.Predicate;
+//import com.querydsl.core.types.Predicate;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 @Repository
 public class BojRepositorySupportImpl extends QuerydslRepositorySupport implements BojRepositorySupport{

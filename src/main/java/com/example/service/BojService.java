@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 import com.example.repository.BojRepository;
 import com.example.repository.ProbTypeRepository;
 import com.example.vo.BojDto;
+import com.example.vo.BojProbType;
 import com.example.vo.BojVo;
 import com.example.vo.ProbTypeVo;
 
@@ -84,7 +85,18 @@ public class BojService {
 		List<BojDto> result = new ArrayList<BojDto>();
 		
 		for(BojVo vo:tmp) {
-			result.add(new BojDto(vo.getId(), vo.getLevel(), vo.getName(), vo.getUrl(), null));
+			if(vo.getBojProbType().size() > 0) {
+				BojDto dto = new BojDto(vo, null);
+				List<String> tmp2 = new ArrayList<String>();
+				for(BojProbType bpt : vo.getBojProbType()) {
+					String type = bpt.getProbTypeVo().getType();
+					dto.getTypes().add(type);
+				}
+				result.add(dto);
+			}else {
+				result.add(new BojDto(vo, null));
+			}
+			
 		}
 		return result;
 	}
