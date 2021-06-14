@@ -26,7 +26,7 @@ public class ProbTypeDto {
 		this.type = type;
 	}
 
-
+	
 
 	public Long getId() {
 		return id;
