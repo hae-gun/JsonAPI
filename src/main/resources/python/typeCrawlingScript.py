@@ -52,10 +52,10 @@ for data in dictList:
     lastPage = int(r2[r2.find('>')+1:r2.rfind('<')])
     data['lastPage'] = lastPage
     tmp.append(data.values())
-    t += 1
-    time.sleep(0.5)
-    if t==3:
-        break
+    # t += 1
+    time.sleep(1)
+    # if t==3:
+    #     break
 
 
 df = pd.DataFrame(tmp,columns=['TypeNum','Kor','Eng','PageCount'])
