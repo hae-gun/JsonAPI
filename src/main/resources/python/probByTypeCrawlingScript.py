@@ -44,7 +44,21 @@ for i, row in df.iterrows() :
     dataType['type'] = df.at[i,'Kor']
     for idx in range(len(dataType['list'])):
         dataType['list'][idx] = selectTypeNum(dataType['list'][idx]) #문제번호추출
-    break
+    result.append(dataType)
+    # type 5개 단위로 잘라서 저장.
+    if (int(i)+1)%5==0:
+        tmp = [result]
+        df = pd.DataFrame(tmp)
+        fileName='type_prob_'+str(int(i)//10)+'.json'
+        with open(fileName, 'w', encoding='utf-8') as file:
+            df.to_json(file, force_ascii=False)
+        probList=list()
+        break
+    time.sleep(1)
+    
+        
+
+    
 # type : 알고리즘 유형
 # list : 문제번호 리스트 -> 추후 BojVo Id와 매핑될 필드    
 print(dataType)
