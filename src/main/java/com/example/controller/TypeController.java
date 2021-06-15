@@ -1,7 +1,12 @@
 package com.example.controller;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +31,7 @@ public class TypeController {
 	}
 	
 	@GetMapping("/all")
-	public List<BojDto> getAllBojDto(){
+	public List<ProbTypeDto> getAllBojDto(){
 		return service.getAll();
 	}
 	
@@ -42,4 +47,13 @@ public class TypeController {
 		return service.getProbsByType(type);
 	}
 	
+	@GetMapping("/typeNo/{type}")
+	public List<ProbTypeDto> getByTypeNo(@PathVariable String type) {
+		return service.getProbsByTypeNo(Long.valueOf(type));
+	}
+	
+	@GetMapping("/test")
+	public JSONArray test() throws FileNotFoundException, IOException, ParseException {
+		return service.saveProbType();
+	}
 }

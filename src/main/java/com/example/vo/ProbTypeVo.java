@@ -1,5 +1,6 @@
 package com.example.vo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -8,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.json.simple.JSONObject;
 
 @Entity
 @Table(name="PTYPE")
@@ -19,18 +22,36 @@ public class ProbTypeVo {
 	
 	private Long typeNo;
 	private String type;
-	
+	private String typeEng;
 	@OneToMany(mappedBy = "probTypeVo")
-	private List<BojProbType> bojProbTypes;
+	private List<BojProbType> bojProbTypes = new ArrayList<BojProbType>();
 
 	
-	
+//	{
+//    "num": 124,
+//    "name": "수학",
+//    "count": 29,
+//    "eng": "MATHEMATICS"
+//}
 	public ProbTypeVo() {
 	}
-	public ProbTypeVo(Long id, String type,Long typeNo) {
-		this.id = id;
-		this.type = type;
+	public ProbTypeVo(JSONObject obj) {
+		this.typeNo = Long.valueOf(obj.get("num").toString());
+		this.type = obj.get("name").toString();
+		this.typeEng = obj.get("eng").toString();
+	}
+	
+	public ProbTypeVo(Long typeNo, String type, String typeEng) {
 		this.typeNo = typeNo;
+		this.type = type;
+		this.typeEng = typeEng;
+	}
+
+	public String getTypeEng() {
+		return typeEng;
+	}
+	public void setTypeEng(String typeEng) {
+		this.typeEng = typeEng;
 	}
 	public Long getId() {
 		return id;
@@ -55,6 +76,10 @@ public class ProbTypeVo {
 	}
 	public void setTypeNo(Long typeNo) {
 		this.typeNo = typeNo;
+	}
+	@Override
+	public String toString() {
+		return "ProbTypeVo [typeNo=" + typeNo + ", type=" + type + ", typeEng=" + typeEng + "]";
 	}
 	
 	

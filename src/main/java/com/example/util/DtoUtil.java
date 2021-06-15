@@ -1,7 +1,19 @@
 package com.example.util;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.springframework.core.io.ClassPathResource;
 
 import com.example.vo.BojDto;
 import com.example.vo.BojProbType;
@@ -24,5 +36,21 @@ public class DtoUtil {
 			return result;
 		}
 	
+	public static JSONObject readJsonFile(String fullPath) throws FileNotFoundException, IOException, ParseException {
+		JSONParser parser = new JSONParser();
+		System.out.println("in ReadJsonFile");
+//		String selectTier = tier.toLowerCase();
+		ClassPathResource resource = new ClassPathResource(fullPath);
+		System.out.println(resource.getURI());
+		 Path path = Paths.get(resource.getURI());
+		 
+//		String source = "/home/chlgprms/crawling/JsonAPI/build/resources/main/python/tier_" + selectTier + ".json";
+		File file = new File(path.toUri());
+		return (JSONObject) parser.parse(new FileReader(file));
+	}
 	
+	public static JSONArray objectToArr(JSONObject object) throws ParseException {
+		JSONParser parser = new JSONParser();
+		return (JSONArray)parser.parse(object.toJSONString());
+	}
 }

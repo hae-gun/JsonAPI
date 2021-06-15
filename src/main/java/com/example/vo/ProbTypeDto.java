@@ -9,7 +9,7 @@ public class ProbTypeDto {
 	private Long id;
 	private Long typeNo;
 	private String type;
-	
+	private String typeEng;
 	private List<BojVo> probs = new ArrayList<BojVo>();
 
 	
@@ -19,13 +19,18 @@ public class ProbTypeDto {
 	}
 
 
-
 	public ProbTypeDto(Long id, Long typeNo, String type) {
 		this.id = id;
 		this.typeNo = typeNo;
 		this.type = type;
 	}
-
+	 
+	public ProbTypeDto(ProbTypeVo vo) {
+		this.id = vo.getId();
+		this.typeNo = vo.getTypeNo();
+		this.type = vo.getType();
+		this.typeEng = vo.getTypeEng();
+	}
 	
 
 	public Long getId() {
@@ -67,6 +72,11 @@ public class ProbTypeDto {
 	public Long getTypeNo() {
 		return typeNo;
 	}
+
+	public String getTypeEng() {
+		return typeEng;
+	}
+
 	
 	
 	

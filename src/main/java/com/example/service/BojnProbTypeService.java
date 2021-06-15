@@ -1,5 +1,7 @@
 package com.example.service;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -7,11 +9,16 @@ import java.util.Set;
 
 import javax.transaction.Transactional;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 
 import com.example.repository.BojProbTypeRepository;
 import com.example.repository.BojRepository;
 import com.example.repository.ProbTypeRepository;
+import com.example.util.DtoUtil;
 import com.example.vo.BojDto;
 import com.example.vo.BojProbType;
 import com.example.vo.BojVo;
@@ -64,9 +71,39 @@ public class BojnProbTypeService {
 		return output;
 	}
 
+	public JSONArray saveProbType() throws FileNotFoundException, IOException, ParseException {
+		
+		JSONObject object = DtoUtil.readJsonFile("/python/rearrange2.json");
+		JSONParser par = new JSONParser();
+		JSONObject tmp = (JSONObject) par.parse(object.get("data").toString());
+		JSONArray arr = (JSONArray)par.parse(tmp.get("0").toString());
 
-	public List<BojDto> getAll() {
-		return null;
+		for(int idx=0; idx < arr.size(); idx++) {
+			JSONObject obj = (JSONObject)arr.get(idx);
+			ProbTypeVo vo = new ProbTypeVo(obj);
+			typeRepo.save(vo);
+		}
+		
+		
+		
+		return arr;
+	}
+	public List<ProbTypeDto> getAll() {
+		List<ProbTypeVo> list = typeRepo.findAll();
+		List<ProbTypeDto> result = new ArrayList<ProbTypeDto>();
+		for(ProbTypeVo vo: list) {
+			result.add(new ProbTypeDto(vo));
+		}
+		return result;
+	}
+	public List<ProbTypeDto> getProbsByTypeNo(Long type) {
+		List<ProbTypeVo> list = typeRepo.findByTypeNo(type);
+		List<ProbTypeDto> result = new ArrayList<ProbTypeDto>();
+		for(ProbTypeVo vo : list) {
+			result.add(new ProbTypeDto(vo));
+		}
+		
+		return result;
 	}
 	
 
