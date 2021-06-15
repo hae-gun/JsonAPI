@@ -32,7 +32,7 @@ for i, row in df.iterrows() :
     #print(page,algo)
     for j in range(1,page+1):
         html = crawling(url,algo,j)
-        time.sleep(1)
+        time.sleep(0.2)
         c = BeautifulSoup(html,'html.parser')
         #print(c)
         r = list(c.select('#problemset > tbody > tr > td:nth-child(1)'))
@@ -49,13 +49,14 @@ for i, row in df.iterrows() :
     # type 5개 단위로 잘라서 저장.
     if (int(i)+1)%5==0:
         tmp = [result]
-        df = pd.DataFrame(tmp)
+        df2 = pd.DataFrame(tmp)
         fileName='type_prob_'+str(int(i)//10)+'.json'
         with open(fileName, 'w', encoding='utf-8') as file:
-            df.to_json(file, force_ascii=False)
-        probList=list()
-        break
-    time.sleep(1)
+            df2.to_json(file, force_ascii=False)
+        print('save data',fileName)
+        # 리스트 초기화
+        result=list()
+    time.sleep(0.2)
     
         
 
