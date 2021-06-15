@@ -42,6 +42,7 @@ for i, row in df.iterrows() :
             dataType['list']=list()
             dataType['list'] += r
     dataType['type'] = df.at[i,'Kor']
+    dataType['typeNum']=algo
     for idx in range(len(dataType['list'])):
         dataType['list'][idx] = selectTypeNum(dataType['list'][idx]) #문제번호추출
     result.append(dataType)
