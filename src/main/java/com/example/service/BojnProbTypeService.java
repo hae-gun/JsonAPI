@@ -99,7 +99,7 @@ public class BojnProbTypeService {
 		for(int no=0; no<34; no++) {
 //		int no=11;
 //			JSONObject json = DtoUtil.readJsonFile("/python/type_prob_"+no+".json");
-			JSONObject json = DtoUtil.readJsonFile("/home/chlgprms/crawling/JsonAPI/build/resources/main/python/type_prob_"+no+".json");
+			JSONObject json = DtoUtil.readJsonFile("/home/chlgprms/JsonAPI/src/main/resources/python/type_prob_"+no+".json");
 			String[] idxStr = {"0","1","2","3","4"};
 			for(int idx=0; idx<5; idx++) {
 				JSONObject data = (JSONObject)json.get(idxStr[idx]);
