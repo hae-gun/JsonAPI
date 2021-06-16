@@ -49,6 +49,7 @@ public class BojService {
 		 Path path = Paths.get(resource.getURI());
 
 		String source = "/home/chlgprms/JsonAPI/src/main/resources/python/tier_" + selectTier + ".json";
+		System.out.println(source);
 		File file = new File(source);
 		return (JSONObject) parser.parse(new FileReader(file));
 	}
