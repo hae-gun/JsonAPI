@@ -2,10 +2,7 @@ package com.example.service;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import javax.transaction.Transactional;
 
@@ -43,11 +40,11 @@ public class BojnProbTypeService {
 	public BojDto save(String bojVo, Long probTypeVo) {
 		
 		System.out.println("MATCHING BOJVO:"+bojVo+" PROBTYPEVO:"+probTypeVo);
-		BojVo boj = bojRepo.findById(bojVo) == null ? null : bojRepo.findById(bojVo).ofNullable();
+		BojVo boj = bojRepo.findById(bojVo).isPresent() ? bojRepo.findById(bojVo).get() : new BojVo();
 		System.out.println(boj);
 		ProbTypeVo prob = typeRepo.findByTypeNo(probTypeVo) == null? null : typeRepo.findByTypeNo(probTypeVo).get(0);
-		
-		if( boj != null && prob != null) {
+		System.out.println(boj);
+		if( boj.getId() != null  && prob != null) {
 			BojProbType middle = new BojProbType(boj, prob);
 			boj.getBojProbType().add(middle);
 			prob.getBojProbTypes().add(middle);

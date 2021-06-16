@@ -1,46 +1,62 @@
-com/example/repository/BojRepository.java
- com.example.repository.BojRepository
 com/example/vo/ProbTypeVo.java
  com.example.vo.ProbTypeVo
 com/example/service/JpaServices.java
  com.example.service.JpaServices
-com/example/repository/TestRepository.java
- com.example.repository.TestRepository
+com/example/service/BojnProbTypeService.java
+ com.example.service.BojnProbTypeService
 com/example/vo/QBojProbType.java
  com.example.vo.QBojProbType
 com/example/controller/Test.java
  com.example.controller.Test
 com/example/vo/QProbTypeVo.java
  com.example.vo.QProbTypeVo
+com/example/vo/ProbTypeDto.java
+ com.example.vo.ProbTypeDto
 com/example/repository/BojRepositorySupportImpl.java
  com.example.repository.BojRepositorySupportImpl
-com/example/vo/Account.java
- com.example.vo.Account
 com/example/demo/DataSourceConfiguration.java
  com.example.demo.DataSourceConfiguration
 com/example/service/BojService.java
  com.example.service.BojService
-com/example/demo/SpringBootConfiguration.java
- com.example.demo.SpringBootConfiguration
 com/example/vo/QTestVo.java
  com.example.vo.QTestVo
-com/example/vo/BojDto.java
- com.example.vo.BojDto
 com/example/repository/BojRepositorySupport.java
  com.example.repository.BojRepositorySupport
-com/example/demo/JsonApiApplication.java
- com.example.demo.JsonApiApplication
+com/example/controller/TypeController.java
+ com.example.controller.TypeController
 com/example/vo/QBojVo.java
  com.example.vo.QBojVo
-com/example/vo/TestVo.java
- com.example.vo.TestVo
 com/example/repository/ProbTypeRepository.java
  com.example.repository.ProbTypeRepository
-com/example/vo/BojVo.java
- com.example.vo.BojVo
-com/example/demo/H2ServerConfig.java
- com.example.demo.H2ServerConfig
+com/example/controller/BojAndTypeController.java
+ com.example.controller.BojAndTypeController
 com/example/vo/BojProbType.java
  com.example.vo.BojProbType
 com/example/controller/JsonController.java
  com.example.controller.JsonController
+com/example/repository/BojRepository.java
+ com.example.repository.BojRepository
+com/example/repository/BojProbTypeRepository.java
+ com.example.repository.BojProbTypeRepository
+com/example/repository/TestRepository.java
+ com.example.repository.TestRepository
+com/example/util/DtoUtil.java
+ com.example.util.DtoUtil
+com/example/vo/Account.java
+ com.example.vo.Account
+com/example/demo/SpringBootConfiguration.java
+ com.example.demo.SpringBootConfiguration
+com/example/vo/InputDto.java
+ com.example.vo.InputDto
+com/example/vo/BojDto.java
+ com.example.vo.BojDto
+com/example/demo/JsonApiApplication.java
+ com.example.demo.JsonApiApplication
+com/example/vo/TestVo.java
+ com.example.vo.TestVo
+com/example/vo/BojVo.java
+ com.example.vo.BojVo
+com/example/service/ProbTypeService.java
+ com.example.service.ProbTypeService
+com/example/demo/H2ServerConfig.java
+ com.example.demo.H2ServerConfig
