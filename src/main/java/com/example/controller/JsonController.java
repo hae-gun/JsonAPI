@@ -49,7 +49,7 @@ public class JsonController {
 		return bojService.searchAll();
 	}
 	@GetMapping("/prob/{name}")
-	public List<BojVo> searchByName(@PathVariable String name){
+	public List<BojDto> searchByName(@PathVariable String name){
 		return bojService.searchByName(name);
 	}
 	@GetMapping("/random/{tier}")

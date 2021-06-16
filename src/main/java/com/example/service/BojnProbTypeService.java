@@ -32,6 +32,8 @@ public class BojnProbTypeService {
 	private final ProbTypeRepository typeRepo;
 	private final BojProbTypeRepository middleRepo;
 	
+	private JSONParser parser = new JSONParser();
+	
 	public BojnProbTypeService(BojRepository bojRepo, ProbTypeRepository typeRepo, BojProbTypeRepository middleRepo) {
 		this.bojRepo = bojRepo;
 		this.typeRepo = typeRepo;
@@ -40,17 +42,24 @@ public class BojnProbTypeService {
 	@Transactional
 	public BojDto save(String bojVo, Long probTypeVo) {
 		
-		BojVo boj = bojRepo.findById(bojVo).get();
-		ProbTypeVo prob = typeRepo.findById(probTypeVo).get();
+		System.out.println("MATCHING BOJVO:"+bojVo+" PROBTYPEVO:"+probTypeVo);
+		BojVo boj = bojRepo.findById(bojVo) == null ? null : bojRepo.findById(bojVo).ofNullable();
+		System.out.println(boj);
+		ProbTypeVo prob = typeRepo.findByTypeNo(probTypeVo) == null? null : typeRepo.findByTypeNo(probTypeVo).get(0);
 		
-		BojProbType middle = new BojProbType(boj, prob);
+		if( boj != null && prob != null) {
+			BojProbType middle = new BojProbType(boj, prob);
+			boj.getBojProbType().add(middle);
+			prob.getBojProbTypes().add(middle);
+			System.out.println("MIDDLE::"+middle);
+			System.out.println("BOJ::"+boj);
+			System.out.println("PROB::"+prob);
+			middleRepo.save(middle);
+			return new BojDto(boj);
+		}else {
+			return new BojDto();
+		}
 		
-		boj.getBojProbType().add(middle);
-		prob.getBojProbTypes().add(middle);
-		
-		middleRepo.save(middle);
-		
-		return new BojDto(boj,middle.getProbTypeVo().getType());
 	}
 	
 	public List<ProbTypeDto> getProbsByType(String type){
@@ -60,7 +69,7 @@ public class BojnProbTypeService {
 			Set<BojVo> allProb = new HashSet<>();
 			for(BojProbType vo2 :vo.getBojProbTypes()) {
 				BojVo tmp = vo2.getBojVo();
-				BojVo saveData = new BojVo(tmp.getId(), tmp.getLevel(), tmp.getName(), tmp.getUrl());
+				BojVo saveData = new BojVo(tmp);
 				allProb.add(saveData);
 			}
 			
@@ -74,9 +83,8 @@ public class BojnProbTypeService {
 	public JSONArray saveProbType() throws FileNotFoundException, IOException, ParseException {
 		
 		JSONObject object = DtoUtil.readJsonFile("/python/rearrange2.json");
-		JSONParser par = new JSONParser();
-		JSONObject tmp = (JSONObject) par.parse(object.get("data").toString());
-		JSONArray arr = (JSONArray)par.parse(tmp.get("0").toString());
+		JSONObject tmp = (JSONObject) parser.parse(object.get("data").toString());
+		JSONArray arr = (JSONArray)parser.parse(tmp.get("0").toString());
 
 		for(int idx=0; idx < arr.size(); idx++) {
 			JSONObject obj = (JSONObject)arr.get(idx);
@@ -84,10 +92,37 @@ public class BojnProbTypeService {
 			typeRepo.save(vo);
 		}
 		
-		
-		
 		return arr;
 	}
+	
+	public JSONArray matchBojAndProb() throws FileNotFoundException, IOException, ParseException {
+		middleRepo.deleteAll();
+		JSONArray result = new JSONArray();
+		for(int no=0; no<34; no++) {
+//		int no=11;
+			JSONObject json = DtoUtil.readJsonFile("/python/type_prob_"+no+".json");
+			String[] idxStr = {"0","1","2","3","4"};
+			for(int idx=0; idx<5; idx++) {
+				JSONObject data = (JSONObject)json.get(idxStr[idx]);
+				data = (JSONObject)data.get("0");
+				System.out.println(data);
+				JSONArray arr = (JSONArray) parser.parse(data.get("list").toString());
+				System.out.println(arr);
+				
+				for(int jIdx=0; jIdx < arr.size(); jIdx++) {
+//					System.out.println();
+//					System.out.println("typeNum::"+Long.valueOf(data.get("typeNum").toString()));
+					save(String.valueOf(arr.get(jIdx)), Long.valueOf(String.valueOf(data.get("typeNum").toString())));
+				}
+				data.put("count", arr.size());
+				result.add(data);
+				
+			}
+		}
+		return new JSONArray();
+	}
+	
+	
 	public List<ProbTypeDto> getAll() {
 		List<ProbTypeVo> list = typeRepo.findAll();
 		List<ProbTypeDto> result = new ArrayList<ProbTypeDto>();
@@ -102,9 +137,8 @@ public class BojnProbTypeService {
 		for(ProbTypeVo vo : list) {
 			result.add(new ProbTypeDto(vo));
 		}
-		
 		return result;
 	}
 	
-
+	
 }

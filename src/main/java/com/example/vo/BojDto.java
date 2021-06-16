@@ -19,14 +19,20 @@ public class BojDto {
 		this.url = url;
 //		this.types = types;
 	}
-	public BojDto(BojVo vo, String type) {
+//	public BojDto(BojVo vo, String type) {
+//		this.id = vo.getId();
+//		this.level = vo.getLevel();
+//		this.name = vo.getName();
+//		this.url = vo.getUrl();
+//		if(type != null) {
+//			this.types.add(type);
+//		}
+//	}
+	public BojDto(BojVo vo) {
 		this.id = vo.getId();
 		this.level = vo.getLevel();
 		this.name = vo.getName();
 		this.url = vo.getUrl();
-		if(type != null) {
-			this.types.add(type);
-		}
 	}
 	
 	
@@ -58,6 +64,8 @@ public class BojDto {
 		return types;
 	}
 	
-	
+	public BojVo convertToBojVo() {
+		return new BojVo(id,level,name,url);
+	}
 	
 }

@@ -1,5 +1,6 @@
 package com.example.vo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -22,7 +23,7 @@ public class BojVo {
 	private String url;
 	
 	@OneToMany(mappedBy = "bojVo")
-	private List<BojProbType> bojProbType;
+	private List<BojProbType> bojProbType = new ArrayList<BojProbType>();
 	
 	public BojVo() {
 		
@@ -33,6 +34,13 @@ public class BojVo {
 		this.name = name;
 		this.url = url;
 	}
+	public BojVo(BojVo vo) {
+		this.id = vo.getId();
+		this.level = vo.getLevel();
+		this.name = vo.getName();
+		this.url = vo.getUrl();
+	}
+	
 	public String getId() {
 		return id;
 	}

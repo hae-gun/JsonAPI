@@ -79,7 +79,7 @@ public class ProbTypeVo {
 	}
 	@Override
 	public String toString() {
-		return "ProbTypeVo [typeNo=" + typeNo + ", type=" + type + ", typeEng=" + typeEng + "]";
+		return "ProbTypeVo [typeNo=" + typeNo + ", type=" + type + ", typeEng=" + typeEng + ", size:"+this.bojProbTypes.size()+"]";
 	}
 	
 	

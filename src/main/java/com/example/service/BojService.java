@@ -86,7 +86,7 @@ public class BojService {
 		
 		for(BojVo vo:tmp) {
 			if(vo.getBojProbType().size() > 0) {
-				BojDto dto = new BojDto(vo, null);
+				BojDto dto = new BojDto(vo);
 				List<String> tmp2 = new ArrayList<String>();
 				for(BojProbType bpt : vo.getBojProbType()) {
 					String type = bpt.getProbTypeVo().getType();
@@ -94,7 +94,7 @@ public class BojService {
 				}
 				result.add(dto);
 			}else {
-				result.add(new BojDto(vo, null));
+				result.add(new BojDto(vo));
 			}
 			
 		}
@@ -111,9 +111,21 @@ public class BojService {
 		result.put("msg", "complete");
 	}
 
-	public List<BojVo> searchByName(String name) {
+	public List<BojDto> searchByName(String name) {
 		String search = "%" + name.toLowerCase() + "%";
-		return ((BojRepository) repository).findByNameLike(search);
+		
+		List<BojVo> tmp = ((BojRepository) repository).findByNameLike(search);
+		List<BojDto> result = new ArrayList<BojDto>();
+		for(BojVo vo: tmp) {
+			
+			BojDto dto = new BojDto(vo);
+			for(BojProbType bpt : vo.getBojProbType()) {
+				dto.getTypes().add(bpt.getProbTypeVo().getType());
+			}
+			
+			result.add(dto);
+		}
+		return result;
 	}
 
 	public List<BojDto> randomProb(String tier, int i) {
@@ -140,11 +152,6 @@ public class BojService {
 	}
 	@Transactional
 	public List<BojVo> test() {
-//		List<BojVo> tmp = searchByName("구구단");
-//		BojVo vo = tmp.get(0);
-//		List<ProbTypeVo> tmp2 = otherRepo.findAll();
-//		
-////		vo.setBojProbType(tmp2.get(0));
 		
 		return  null;
 	}
