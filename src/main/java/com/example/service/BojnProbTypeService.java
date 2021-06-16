@@ -80,7 +80,7 @@ public class BojnProbTypeService {
 	public JSONArray saveProbType() throws FileNotFoundException, IOException, ParseException {
 //		String source = "/home/chlgprms/crawling/JsonAPI/build/resources/main/python/tier_" + selectTier + ".json";
 //		JSONObject object = DtoUtil.readJsonFile("/python/rearrange2.json");
-		JSONObject object = DtoUtil.readJsonFile("/home/chlgprms/crawling/JsonAPI/build/resources/main/python/rearrange2.json");
+		JSONObject object = DtoUtil.readJsonFile("/home/chlgprms/JsonAPI/src/main/resources/python/rearrange2.json");
 		JSONObject tmp = (JSONObject) parser.parse(object.get("data").toString());
 		JSONArray arr = (JSONArray)parser.parse(tmp.get("0").toString());
 

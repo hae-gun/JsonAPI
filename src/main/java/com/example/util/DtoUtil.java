@@ -40,12 +40,12 @@ public class DtoUtil {
 		JSONParser parser = new JSONParser();
 		System.out.println("in ReadJsonFile");
 //		String selectTier = tier.toLowerCase();
-		ClassPathResource resource = new ClassPathResource(fullPath);
-		System.out.println(resource.getURI());
-		 Path path = Paths.get(resource.getURI());
+//		ClassPathResource resource = new ClassPathResource(fullPath);
+//		System.out.println(resource.getURI());
+//		 Path path = Paths.get(resource.getURI());
 		 
 //		String source = "/home/chlgprms/crawling/JsonAPI/build/resources/main/python/tier_" + selectTier + ".json";
-		File file = new File(path.toUri());
+		File file = new File(fullPath);
 		return (JSONObject) parser.parse(new FileReader(file));
 	}
 	
