@@ -11,7 +11,7 @@ public class ProbTypeDto {
 	private String type;
 	private String typeEng;
 	private List<BojVo> probs = new ArrayList<BojVo>();
-
+	
 	
 	
 	public ProbTypeDto() {

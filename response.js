@@ -1,6 +1,5 @@
 function response(room, msg, sender, isGroupChat, replier, ImageDB, packageName) {
     var answer = chkCode(msg);
-    // Log.d(answer,true);
     if(answer != ''){
         replier.reply(answer);
     }
@@ -15,7 +14,6 @@ var chkCode = function(msg){
     var level='';
     if(msg.includes('/')){
         code = msg.slice(1,msg.length);
-        //  Log.d(code,true);
     }else{
         return '';
     }
@@ -34,34 +32,23 @@ var chkCode = function(msg){
     if(level > 5 || !regexp.test(level)){
         return '';
     }
-    // if(code.includes('안녕')){
-    //     return '네, 안녕하세요.';
-    // }
 
     var answer;
-    // if(tierSet.includes(code)){
-    //     code='설정';
-    // }
     
     if(tierSet.includes(code)){
         var probJson = ajax(transfer[code],level);
-        //var tmp = JSON.parse(probJson);
-        // Log.d(probJson,true)
         answer = probJson.replace(/(<([^>]+)>)/g,"");
-        // Log.d(answer,true)
         answer = JSON.parse(JSON.stringify(answer));
         var tmp = answer.split('},{');
         var result=[];
         answer = '랜덤 문제\n';
         for(data of tmp){
             data = data.replace(/\[\{/g,'').replace(/\}\]/g,'');
-            // Log.d(data,true)
             var dtmp = data.split(',');
             var types = ''
             for(i in dtmp){
                 if(i < 4 ){
                     var ddtmp = dtmp[i].split(':');
-                    // Log.d(ddtmp,true)
                     ddtmp[1] = ddtmp[1].split('"')[1];
                     if(ddtmp[0]=='"level"'){
                         answer += ddtmp[1];
@@ -81,19 +68,6 @@ var chkCode = function(msg){
                 answer += ( '분류: '+types.substr(0,types.length-1) + '\n')
             }
             Log.d(types.substr(0,types.length-1).length,true)
-            // for(d of dtmp){
-            //     var ddtmp = d.split(':');
-            //     ddtmp[1] = ddtmp[1].replace(/"/g,'');
-            //     if(ddtmp[0]=='"level"'){
-            //         answer += ddtmp[1];
-            //         answer += ' :';
-            //     }else if(ddtmp[0]=='"name"'){
-            //         answer += ddtmp[1];
-            //         answer += '\n';
-            //     }else if(ddtmp[0]=='"url"'){
-            //         answer = answer + 'www.acmicpc.net' + ddtmp[1] + '\n';
-            //     }
-            // }
         }
         return answer;
     }else if(typeSet.includes(code)){
@@ -104,7 +78,6 @@ var chkCode = function(msg){
         for(d of data){
             Log.d(d,true)
         }
-        // Log.d(answer,true)
     }
 
     switch (code) {
@@ -126,13 +99,11 @@ var menu = function(){
     return result;
 };
 var ajax = function(tier,level){
-    // Log.d(level,true);
     var url ="http://gcp-ip:8080/boj/random/" + (level==''? tier:tier+'/'+level);
     var result = Utils.getWebText(url);
     return result;
 };
 var ajaxType = function(type){
-    // Log.d(level,true);
     var url ="http://gcp-ip:8080/api/" + type;
     var result = Utils.getWebText(url);
     return result;

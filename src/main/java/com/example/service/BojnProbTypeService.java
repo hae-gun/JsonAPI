@@ -79,8 +79,8 @@ public class BojnProbTypeService {
 
 	public JSONArray saveProbType() throws FileNotFoundException, IOException, ParseException {
 //		String source = "/home/chlgprms/crawling/JsonAPI/build/resources/main/python/tier_" + selectTier + ".json";
-//		JSONObject object = DtoUtil.readJsonFile("/python/rearrange2.json");
-		JSONObject object = DtoUtil.readJsonFile("/home/chlgprms/JsonAPI/src/main/resources/python/rearrange2.json");
+		JSONObject object = DtoUtil.readJsonFile("/python/rearrange2.json");
+//		JSONObject object = DtoUtil.readJsonFile("/home/chlgprms/JsonAPI/src/main/resources/python/rearrange2.json");
 		JSONObject tmp = (JSONObject) parser.parse(object.get("data").toString());
 		JSONArray arr = (JSONArray)parser.parse(tmp.get("0").toString());
 
@@ -98,8 +98,8 @@ public class BojnProbTypeService {
 		JSONArray result = new JSONArray();
 		for(int no=0; no<34; no++) {
 //		int no=11;
-//			JSONObject json = DtoUtil.readJsonFile("/python/type_prob_"+no+".json");
-			JSONObject json = DtoUtil.readJsonFile("/home/chlgprms/JsonAPI/src/main/resources/python/type_prob_"+no+".json");
+			JSONObject json = DtoUtil.readJsonFile("/python/type_prob_"+no+".json");
+//			JSONObject json = DtoUtil.readJsonFile("/home/chlgprms/JsonAPI/src/main/resources/python/type_prob_"+no+".json");
 			String[] idxStr = {"0","1","2","3","4"};
 			for(int idx=0; idx<5; idx++) {
 				JSONObject data = (JSONObject)json.get(idxStr[idx]);
@@ -132,6 +132,15 @@ public class BojnProbTypeService {
 	}
 	public List<ProbTypeDto> getProbsByTypeNo(Long type) {
 		List<ProbTypeVo> list = typeRepo.findByTypeNo(type);
+		List<ProbTypeDto> result = new ArrayList<ProbTypeDto>();
+		for(ProbTypeVo vo : list) {
+			result.add(new ProbTypeDto(vo));
+		}
+		return result;
+	}
+	public List<ProbTypeDto> test() {
+		Long[] set = {25L, 11L};
+		List<ProbTypeVo> list= typeRepo.findByTypeNoIn(set);
 		List<ProbTypeDto> result = new ArrayList<ProbTypeDto>();
 		for(ProbTypeVo vo : list) {
 			result.add(new ProbTypeDto(vo));

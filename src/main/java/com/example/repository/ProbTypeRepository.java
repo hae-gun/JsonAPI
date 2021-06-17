@@ -11,4 +11,5 @@ import com.example.vo.ProbTypeVo;
 public interface ProbTypeRepository extends JpaRepository<ProbTypeVo, Long>{
 	List<ProbTypeVo> findByTypeLike(String type);
 	List<ProbTypeVo> findByTypeNo(Long type);
+	List<ProbTypeVo> findByTypeNoIn(Long... type);
 }

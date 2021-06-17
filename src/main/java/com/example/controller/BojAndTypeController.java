@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.service.ProbTypeService;
 import com.example.vo.ProbTypeDto;
+import com.example.vo.ProbTypeDto2;
 
 @RestController
 @RequestMapping("/api")
@@ -37,7 +38,7 @@ public class BojAndTypeController {
 		return service.getDtos(type,level);
 	}
 	@GetMapping("/{type}/one")
-	public List<ProbTypeDto> getTypeProbOneByOne(@PathVariable Long type){
+	public List<ProbTypeDto2> getTypeProbOneByOne(@PathVariable Long type){
 		return service.getDtosPerLevel(type);
 	}
 	

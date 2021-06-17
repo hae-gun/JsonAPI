@@ -57,10 +57,14 @@ public class TypeController {
 		return service.saveProbType();
 	}
 	
-	@GetMapping("/test")
-	public JSONArray test() throws FileNotFoundException, IOException, ParseException {
+	@GetMapping("/matchs")
+	public JSONArray match() throws FileNotFoundException, IOException, ParseException {
 		return service.matchBojAndProb();
 	}
 	
+	@GetMapping("/test")
+	public List<ProbTypeDto> test() throws FileNotFoundException, IOException, ParseException {
+		return service.test();
+	}
 	
 }

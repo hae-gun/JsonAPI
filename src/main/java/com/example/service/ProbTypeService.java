@@ -13,6 +13,7 @@ import com.example.vo.BojDto;
 import com.example.vo.BojProbType;
 import com.example.vo.BojVo;
 import com.example.vo.ProbTypeDto;
+import com.example.vo.ProbTypeDto2;
 import com.example.vo.ProbTypeVo;
 
 @Service
@@ -43,34 +44,34 @@ public class ProbTypeService {
 		return getList(list,level);
 	}
 	
-	public List<ProbTypeDto> getDtosPerLevel(Long id){
+	public List<ProbTypeDto2> getDtosPerLevel(Long id){
 		List<ProbTypeVo> list = repository.findByTypeNo(id);
-		List<ProbTypeDto> dtos = getList(list);
+		List<ProbTypeDto2> dtos = getList2(list);
 		
-		for(ProbTypeDto dto : dtos) {
-			Map<String,List<BojVo>> probByLevel = new HashMap<String, List<BojVo>>();
-			for(BojVo bojVo : dto.getProbs()) {
+		for(ProbTypeDto2 dto : dtos) {
+			Map<String,List<BojDto>> probByLevel = new HashMap<String, List<BojDto>>();
+			for(BojDto bojVo : dto.getProbs()) {
 				String level = bojVo.getLevel().substring(0,bojVo.getLevel().length()-1);
 				if(probByLevel.get(level) == null) {
-					List<BojVo> bojList = new ArrayList<>();
+					List<BojDto> bojList = new ArrayList<>();
 					bojList.add(bojVo);
 					probByLevel.put(level, bojList);
 				}else {
 					probByLevel.get(level).add(bojVo) ;
 				}
 			}
-			
-			List<BojVo> tempList = new ArrayList<>();
-			BojVo[] voArr = new BojVo[6];
+			System.out.println(dto.getProbs().size());
+			List<BojDto> tempList = new ArrayList<>();
+			BojDto[] voArr = new BojDto[6];
 			for(String key : probByLevel.keySet()) {
 				int size = probByLevel.get(key).size();
 				int idx =(int) (Math.random()*size);
-				BojVo saveVo = probByLevel.get(key).get(idx);
+				BojDto saveVo = probByLevel.get(key).get(idx);
 				String level = saveVo.getLevel().substring(0,saveVo.getLevel().length()-1);
 				voArr[index.get(level)] = saveVo;
 			}
 			
-			for(BojVo vo : voArr) {
+			for(BojDto vo : voArr) {
 				if(vo != null) tempList.add(vo);
 			}
 			
@@ -87,10 +88,34 @@ public class ProbTypeService {
 		for (ProbTypeVo vo : list) {
 			System.out.println(vo);
 			ProbTypeDto dto = new ProbTypeDto(vo);
+			
 			List<BojVo> bojList = new ArrayList<BojVo>();
 			for (BojProbType bptVo : vo.getBojProbTypes()) {
 				BojDto bojDto = new BojDto(bptVo.getBojVo());
+				List<String> types = new ArrayList<String>();
+				for(BojProbType bpt:bptVo.getBojVo().getBojProbType()) {
+					bojDto.addType(bpt.getProbTypeVo().getType());
+				}
 				bojList.add(bojDto.convertToBojVo());
+			}
+			dto.setProbs(bojList);
+			dtoList.add(dto);
+		}
+		return dtoList;
+	}
+	public List<ProbTypeDto2> getList2(List<ProbTypeVo> list){
+		List<ProbTypeDto2> dtoList = new ArrayList<ProbTypeDto2>();
+		for (ProbTypeVo vo : list) {
+			System.out.println(vo);
+			ProbTypeDto2 dto = new ProbTypeDto2(vo);
+			
+			List<BojDto> bojList = new ArrayList<BojDto>();
+			for (BojProbType bptVo : vo.getBojProbTypes()) {
+				BojDto bojDto = new BojDto(bptVo.getBojVo());
+				for(BojProbType bpt:bptVo.getBojVo().getBojProbType()) {
+					bojDto.addType(bpt.getProbTypeVo().getType());
+				}
+				bojList.add(bojDto);
 			}
 			dto.setProbs(bojList);
 			dtoList.add(dto);

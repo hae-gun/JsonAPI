@@ -45,12 +45,12 @@ public class BojService {
 		System.out.println("in ReadJsonFile");
 		String selectTier = tier.toLowerCase();
 		ClassPathResource resource = new ClassPathResource("/python/tier_" + selectTier + ".json");
-//		System.out.println(resource.getURI());
-//		 Path path = Paths.get(resource.getURI());
+		System.out.println(resource.getURI());
+		 Path path = Paths.get(resource.getURI());
 
-		String source = "/home/chlgprms/JsonAPI/src/main/resources/python/tier_" + selectTier + ".json";
-		System.out.println(source);
-		File file = new File(source);
+//		String source = "/home/chlgprms/JsonAPI/src/main/resources/python/tier_" + selectTier + ".json";
+//		System.out.println(source);
+		File file = new File(path.toUri());
 		return (JSONObject) parser.parse(new FileReader(file));
 	}
 

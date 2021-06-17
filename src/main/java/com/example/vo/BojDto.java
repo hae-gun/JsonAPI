@@ -64,8 +64,15 @@ public class BojDto {
 		return types;
 	}
 	
+	public void addType(String type) {
+		this.types.add(type);
+	}
 	public BojVo convertToBojVo() {
 		return new BojVo(id,level,name,url);
+	}
+	@Override
+	public String toString() {
+		return "BojDto [id=" + id + ", level=" + level + ", name=" + name + ", url=" + url + ", types=" + types + "]";
 	}
 	
 }
