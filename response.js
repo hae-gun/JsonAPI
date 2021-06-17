@@ -127,13 +127,13 @@ var menu = function(){
 };
 var ajax = function(tier,level){
     // Log.d(level,true);
-    var url ="http://35.224.173.5:8080/boj/random/" + (level==''? tier:tier+'/'+level);
+    var url ="http://gcp-ip:8080/boj/random/" + (level==''? tier:tier+'/'+level);
     var result = Utils.getWebText(url);
     return result;
 };
 var ajaxType = function(type){
     // Log.d(level,true);
-    var url ="http://35.224.173.5:8080/api/" + type;
+    var url ="http://gcp-ip:8080/api/" + type;
     var result = Utils.getWebText(url);
     return result;
 };
