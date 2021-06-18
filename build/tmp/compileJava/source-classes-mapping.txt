@@ -44,6 +44,8 @@ com/example/util/DtoUtil.java
  com.example.util.DtoUtil
 com/example/vo/Account.java
  com.example.vo.Account
+com/example/vo/ProbTypeDto2.java
+ com.example.vo.ProbTypeDto2
 com/example/demo/SpringBootConfiguration.java
  com.example.demo.SpringBootConfiguration
 com/example/vo/InputDto.java
