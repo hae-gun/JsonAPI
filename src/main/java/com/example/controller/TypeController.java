@@ -44,7 +44,7 @@ public class TypeController {
 	}
 	
 	@GetMapping("/{type}")
-	public List<ProbTypeDto> getListByType(@PathVariable String type) {
+	public List<ProbTypeDto2> getListByType(@PathVariable String type) {
 		return service.getProbsByType(type);
 	}
 	

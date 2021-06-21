@@ -39,12 +39,12 @@ public class BojnProbTypeService {
 		this.middleRepo = middleRepo;
 	}
 	@Transactional
-	public BojDto save(String bojVo, Long probTypeVo) {
+	public BojDto save(String bojVo, Long probTypeVoNo) {
 		
-		System.out.println("MATCHING BOJVO:"+bojVo+" PROBTYPEVO:"+probTypeVo);
+		System.out.println("MATCHING BOJVO:"+bojVo+" PROBTYPEVO:"+probTypeVoNo);
 		BojVo boj = bojRepo.findById(bojVo).isPresent() ? bojRepo.findById(bojVo).get() : new BojVo();
 		System.out.println(boj);
-		ProbTypeVo prob = typeRepo.findByTypeNo(probTypeVo) == null? null : typeRepo.findByTypeNo(probTypeVo).get(0);
+		ProbTypeVo prob = typeRepo.findByTypeNo(probTypeVoNo) != null ? typeRepo.findByTypeNo(probTypeVoNo).get(0) : null;
 		System.out.println(boj);
 		if( boj.getId() != null  && prob != null) {
 			BojProbType middle = new BojProbType(boj, prob);
@@ -61,31 +61,16 @@ public class BojnProbTypeService {
 		
 	}
 	
-	public List<ProbTypeDto> getProbsByType(String type){
-		List<ProbTypeVo> result = typeRepo.findByTypeLike(type);
-		List<ProbTypeDto> output = new ArrayList<ProbTypeDto>();
-		for(ProbTypeVo vo : result) {
-			Set<BojVo> allProb = new HashSet<>();
-			for(BojProbType vo2 :vo.getBojProbTypes()) {
-				BojVo tmp = vo2.getBojVo();
-				BojVo saveData = new BojVo(tmp);
-				allProb.add(saveData);
-			}
-			
-			ProbTypeDto dto = new ProbTypeDto(vo.getId(), vo.getTypeNo(), vo.getType());
-			dto.setProbs(new ArrayList<BojVo>(allProb));
-			output.add(dto);
-		}
-		return output;
+	public List<ProbTypeDto2> getProbsByType(String type){
+		return typeRepo.findByTypeLike(type)
+				.stream()
+				.map(vo->vo.parseDto2(vo.getBojDto()))
+				.collect(Collectors.toList());
 	}
 
 	public JSONArray saveProbType() throws FileNotFoundException, IOException, ParseException {
-//		String source = "/home/chlgprms/crawling/JsonAPI/build/resources/main/python/tier_" + selectTier + ".json";
-		JSONObject object = DtoUtil.readJsonFile("/python/rearrange2.json");
-//		JSONObject object = DtoUtil.readJsonFile("/home/chlgprms/JsonAPI/src/main/resources/python/rearrange2.json");
-		JSONObject tmp = (JSONObject) parser.parse(object.get("data").toString());
-		JSONArray arr = (JSONArray)parser.parse(tmp.get("0").toString());
 
+		JSONArray arr = DtoUtil.getJsonArray("/python/rearrange2.json");
 		for(int idx=0; idx < arr.size(); idx++) {
 			JSONObject obj = (JSONObject)arr.get(idx);
 			ProbTypeVo vo = new ProbTypeVo(obj);
@@ -111,8 +96,6 @@ public class BojnProbTypeService {
 				System.out.println(arr);
 				
 				for(int jIdx=0; jIdx < arr.size(); jIdx++) {
-//					System.out.println();
-//					System.out.println("typeNum::"+Long.valueOf(data.get("typeNum").toString()));
 					save(String.valueOf(arr.get(jIdx)), Long.valueOf(String.valueOf(data.get("typeNum").toString())));
 				}
 				data.put("count", arr.size());
@@ -122,7 +105,6 @@ public class BojnProbTypeService {
 		}
 		return new JSONArray();
 	}
-	
 	
 	public List<ProbTypeDto2> getAll() {
 		return typeRepo.findAll()
