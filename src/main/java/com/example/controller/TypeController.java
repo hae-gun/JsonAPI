@@ -18,6 +18,7 @@ import com.example.service.BojnProbTypeService;
 import com.example.vo.BojDto;
 import com.example.vo.InputDto;
 import com.example.vo.ProbTypeDto;
+import com.example.vo.ProbTypeDto2;
 
 @RestController
 @RequestMapping("/type")
@@ -31,7 +32,7 @@ public class TypeController {
 	}
 	
 	@GetMapping("/all")
-	public List<ProbTypeDto> getAllBojDto(){
+	public List<ProbTypeDto2> getAllBojDto(){
 		return service.getAll();
 	}
 	
@@ -47,8 +48,8 @@ public class TypeController {
 		return service.getProbsByType(type);
 	}
 	
-	@GetMapping("/typeNo/{type}")
-	public List<ProbTypeDto> getByTypeNo(@PathVariable String type) {
+	@GetMapping("/type-no/{type}")
+	public List<ProbTypeDto2> getByTypeNo(@PathVariable String type) {
 		return service.getProbsByTypeNo(Long.valueOf(type));
 	}
 	
@@ -63,7 +64,7 @@ public class TypeController {
 	}
 	
 	@GetMapping("/test")
-	public List<ProbTypeDto> test() throws FileNotFoundException, IOException, ParseException {
+	public List<ProbTypeDto2> test() throws FileNotFoundException, IOException, ParseException {
 		return service.test();
 	}
 	

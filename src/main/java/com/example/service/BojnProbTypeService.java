@@ -3,6 +3,7 @@ package com.example.service;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -20,6 +21,7 @@ import com.example.vo.BojDto;
 import com.example.vo.BojProbType;
 import com.example.vo.BojVo;
 import com.example.vo.ProbTypeDto;
+import com.example.vo.ProbTypeDto2;
 import com.example.vo.ProbTypeVo;
 
 @Service
@@ -122,30 +124,23 @@ public class BojnProbTypeService {
 	}
 	
 	
-	public List<ProbTypeDto> getAll() {
-		List<ProbTypeVo> list = typeRepo.findAll();
-		List<ProbTypeDto> result = new ArrayList<ProbTypeDto>();
-		for(ProbTypeVo vo: list) {
-			result.add(new ProbTypeDto(vo));
-		}
-		return result;
+	public List<ProbTypeDto2> getAll() {
+		return typeRepo.findAll()
+				.stream()
+				.map(ProbTypeVo::parseDto2)
+				.collect(Collectors.toList());
 	}
-	public List<ProbTypeDto> getProbsByTypeNo(Long type) {
-		List<ProbTypeVo> list = typeRepo.findByTypeNo(type);
-		List<ProbTypeDto> result = new ArrayList<ProbTypeDto>();
-		for(ProbTypeVo vo : list) {
-			result.add(new ProbTypeDto(vo));
-		}
-		return result;
+	public List<ProbTypeDto2> getProbsByTypeNo(Long type) {
+		return typeRepo.findByTypeNo(type)
+				.stream()
+				.map(vo -> vo.parseDto2(vo.getBojDto()))
+				.collect(Collectors.toList());
 	}
-	public List<ProbTypeDto> test() {
+	public List<ProbTypeDto2> test() {
 		Long[] set = {25L, 11L};
-		List<ProbTypeVo> list= typeRepo.findByTypeNoIn(set);
-		List<ProbTypeDto> result = new ArrayList<ProbTypeDto>();
-		for(ProbTypeVo vo : list) {
-			result.add(new ProbTypeDto(vo));
-		}
-		return result;
+		return typeRepo.findByTypeNoIn(set).stream()
+				.map(ProbTypeVo::parseDto2)
+				.collect(Collectors.toList());
 	}
 	
 	

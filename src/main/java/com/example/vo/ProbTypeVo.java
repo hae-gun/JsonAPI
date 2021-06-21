@@ -2,6 +2,7 @@ package com.example.vo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -82,5 +83,18 @@ public class ProbTypeVo {
 		return "ProbTypeVo [typeNo=" + typeNo + ", type=" + type + ", typeEng=" + typeEng + ", size:"+this.bojProbTypes.size()+"]";
 	}
 	
+	public ProbTypeDto2 parseDto2() {
+		return new ProbTypeDto2(this);
+	}
+	public ProbTypeDto2 parseDto2(List list) {
+		return new ProbTypeDto2(this,list);
+	}
 	
+	public ProbTypeDto parseDto() {
+		return new ProbTypeDto(this);
+	}
+	
+	public List<BojDto> getBojDto(){
+		return this.bojProbTypes.stream().map(vo -> vo.bojVo.parseBojDto()).collect(Collectors.toList());
+	}
 }

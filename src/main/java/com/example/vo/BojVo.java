@@ -76,5 +76,7 @@ public class BojVo {
 		this.bojProbType = bojProbType;
 	}
 	
-	
+	public BojDto parseBojDto() {
+		return new BojDto(this);
+	}
 }
