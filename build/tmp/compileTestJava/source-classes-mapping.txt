@@ -1,0 +1,2 @@
+com/example/service/BojnProbTypeServiceTest.java
+ com.example.service.BojnProbTypeServiceTest
