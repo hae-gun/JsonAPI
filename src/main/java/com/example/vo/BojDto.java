@@ -33,6 +33,7 @@ public class BojDto {
 		this.level = vo.getLevel();
 		this.name = vo.getName();
 		this.url = vo.getUrl();
+		vo.getBojProbType().stream().forEach(v->types.add(v.probTypeVo.getType()));
 	}
 	
 	

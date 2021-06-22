@@ -97,4 +97,8 @@ public class ProbTypeVo {
 	public List<BojDto> getBojDto(){
 		return this.bojProbTypes.stream().map(vo -> vo.bojVo.parseBojDto()).collect(Collectors.toList());
 	}
+
+	public ProbTypeDto2 getPTD2(){
+		return parseDto2(getBojDto());
+	}
 }

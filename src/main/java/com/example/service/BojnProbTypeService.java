@@ -94,13 +94,12 @@ public class BojnProbTypeService {
 				System.out.println(data);
 				JSONArray arr = (JSONArray) parser.parse(data.get("list").toString());
 				System.out.println(arr);
-				
+
 				for(int jIdx=0; jIdx < arr.size(); jIdx++) {
 					save(String.valueOf(arr.get(jIdx)), Long.valueOf(String.valueOf(data.get("typeNum").toString())));
 				}
 				data.put("count", arr.size());
 				result.add(data);
-				
 			}
 		}
 		return new JSONArray();

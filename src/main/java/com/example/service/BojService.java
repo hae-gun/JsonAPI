@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -82,24 +83,7 @@ public class BojService {
 	public List<BojDto> searchByTier(String tier) {
 		String search = "%" + tier.toLowerCase() + "%";
 		List<BojVo> tmp = ((BojRepository) repository).findByLevelLike(search);
-		
-		List<BojDto> result = new ArrayList<BojDto>();
-		
-		for(BojVo vo:tmp) {
-			if(vo.getBojProbType().size() > 0) {
-				BojDto dto = new BojDto(vo);
-				List<String> tmp2 = new ArrayList<String>();
-				for(BojProbType bpt : vo.getBojProbType()) {
-					String type = bpt.getProbTypeVo().getType();
-					dto.getTypes().add(type);
-				}
-				result.add(dto);
-			}else {
-				result.add(new BojDto(vo));
-			}
-			
-		}
-		return result;
+		return tmp.stream().map(BojVo::parseBojDto).collect(Collectors.toList());
 	}
 
 	public List<BojVo> searchAll() {
@@ -114,19 +98,8 @@ public class BojService {
 
 	public List<BojDto> searchByName(String name) {
 		String search = "%" + name.toLowerCase() + "%";
-		
 		List<BojVo> tmp = ((BojRepository) repository).findByNameLike(search);
-		List<BojDto> result = new ArrayList<BojDto>();
-		for(BojVo vo: tmp) {
-			
-			BojDto dto = new BojDto(vo);
-			for(BojProbType bpt : vo.getBojProbType()) {
-				dto.getTypes().add(bpt.getProbTypeVo().getType());
-			}
-			
-			result.add(dto);
-		}
-		return result;
+		return tmp.stream().map(BojVo::parseBojDto).collect(Collectors.toList());
 	}
 
 	public List<BojDto> randomProb(String tier, int i) {
@@ -135,15 +108,14 @@ public class BojService {
 
 		Set<Integer> randomGet2 = new HashSet<>();
 
+
 		while (randomGet2.size() < 2) {
 			int index = (int) (Math.random() * allProb.size());
 			randomGet2.add(index);
 		}
-		List<BojDto> result2 = new ArrayList<BojDto>();
-		for (Integer index : randomGet2) {
-			result2.add(allProb.get(index));
-		}
-		return result2;
+
+
+		return randomGet2.stream().map(idx -> allProb.get(idx)).collect(Collectors.toList());
 	}
 
 	public BojVo makeVo(JSONObject obj) {

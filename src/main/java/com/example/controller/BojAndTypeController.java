@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,7 +39,7 @@ public class BojAndTypeController {
 		return service.getDtos(type,level);
 	}
 	@GetMapping("/{type}/one")
-	public List<ProbTypeDto2> getTypeProbOneByOne(@PathVariable Long type){
+	public Map<String,List<ProbTypeDto2>> getTypeProbOneByOne(@PathVariable Long type){
 		return service.getDtosPerLevel(type);
 	}
 	
