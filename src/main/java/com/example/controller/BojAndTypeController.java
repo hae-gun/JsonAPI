@@ -23,13 +23,13 @@ public class BojAndTypeController {
 	}
 	
 	@GetMapping("/all")
-	public List<ProbTypeDto> getAll(){
+	public List<ProbTypeDto2> getAll(){
 		return service.getDtos();
 	}
 	
 	// /{알고리즘번호}
 	@GetMapping("/{type}")
-	public List<ProbTypeDto> getTypeProb(@PathVariable Long type){
+	public List<ProbTypeDto2> getTypeProb(@PathVariable Long type){
 		return service.getDtos(type);
 	}
 	
@@ -39,7 +39,7 @@ public class BojAndTypeController {
 		return service.getDtos(type,level);
 	}
 	@GetMapping("/{type}/one")
-	public Map<String,List<ProbTypeDto2>> getTypeProbOneByOne(@PathVariable Long type){
+	public List<ProbTypeDto2> getTypeProbOneByOne(@PathVariable Long type){
 		return service.getDtosPerLevel(type);
 	}
 	

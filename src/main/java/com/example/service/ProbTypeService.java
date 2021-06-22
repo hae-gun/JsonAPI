@@ -30,12 +30,12 @@ public class ProbTypeService {
 		}
 	}
 
-	public List<ProbTypeDto> getDtos() {
+	public List<ProbTypeDto2> getDtos() {
 		List<ProbTypeVo> list = repository.findAll();
 		return getList(list);
 	}
 
-	public List<ProbTypeDto> getDtos(Long id) {
+	public List<ProbTypeDto2> getDtos(Long id) {
 		List<ProbTypeVo> list = repository.findByTypeNo(id);
 		return getList(list);
 	}
@@ -45,37 +45,27 @@ public class ProbTypeService {
 		return getList(list,level);
 	}
 	
-	public Map<String,List<ProbTypeDto2>> getDtosPerLevel(Long id){
+	public List<ProbTypeDto2> getDtosPerLevel(Long id){
 		List<ProbTypeVo> list = repository.findByTypeNo(id);
-		Map<String,List<ProbTypeDto2>> dtos = getList2(list);
-		return dtos;
+		return getList2(list);
 	}
 
 	
-	public List<ProbTypeDto> getList(List<ProbTypeVo> list){
-		List<ProbTypeDto> dtoList = new ArrayList<ProbTypeDto>();
-		for (ProbTypeVo vo : list) {
-			System.out.println(vo);
-			ProbTypeDto dto = new ProbTypeDto(vo);
-			
-			List<BojVo> bojList = new ArrayList<BojVo>();
-			for (BojProbType bptVo : vo.getBojProbTypes()) {
-				BojDto bojDto = new BojDto(bptVo.getBojVo());
-				List<String> types = new ArrayList<String>();
-				for(BojProbType bpt:bptVo.getBojVo().getBojProbType()) {
-					bojDto.addType(bpt.getProbTypeVo().getType());
-				}
-				bojList.add(bojDto.convertToBojVo());
-			}
-			dto.setProbs(bojList);
-			dtoList.add(dto);
-		}
+	public List<ProbTypeDto2> getList(List<ProbTypeVo> list){
+		List<ProbTypeDto2> dtoList = new ArrayList<ProbTypeDto2>();
+		list.stream().forEach(vo -> dtoList.add(vo.getPTD2()));
 		return dtoList;
 	}
-	public Map<String,List<ProbTypeDto2>> getList2(List<ProbTypeVo> list){
+	public List<ProbTypeDto2> getList2(List<ProbTypeVo> list){
 		List<ProbTypeDto2> dtoList = new ArrayList<ProbTypeDto2>();
 		list.stream().forEach(vo-> dtoList.add(vo.getPTD2()));
-		return dtoList.stream().collect(Collectors.groupingBy(ProbTypeDto2::getType));
+		return dtoList;
+	}
+
+	public Map<String,List<ProbTypeDto2>> testMethod(List<ProbTypeVo> list){
+
+
+		return null;
 	}
 	
 	public List<ProbTypeDto> getList(List<ProbTypeVo> list,String level){
