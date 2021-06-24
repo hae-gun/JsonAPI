@@ -67,5 +67,9 @@ public class TypeController {
 	public List<ProbTypeDto2> test() throws FileNotFoundException, IOException, ParseException {
 		return service.test();
 	}
+	@PostMapping("/test")
+	public List<ProbTypeDto2> test(@RequestBody Long... data) throws FileNotFoundException, IOException, ParseException {
+		return service.test(data);
+	}
 	
 }

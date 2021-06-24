@@ -84,7 +84,6 @@ public class BojnProbTypeService {
 		middleRepo.deleteAll();
 		JSONArray result = new JSONArray();
 		for(int no=0; no<34; no++) {
-//		int no=11;
 			JSONObject json = DtoUtil.readJsonFile("/python/type_prob_"+no+".json");
 //			JSONObject json = DtoUtil.readJsonFile("/home/chlgprms/JsonAPI/src/main/resources/python/type_prob_"+no+".json");
 			String[] idxStr = {"0","1","2","3","4"};
@@ -117,8 +116,7 @@ public class BojnProbTypeService {
 				.map(vo -> vo.parseDto2(vo.getBojDto()))
 				.collect(Collectors.toList());
 	}
-	public List<ProbTypeDto2> test() {
-		Long[] set = {25L, 11L};
+	public List<ProbTypeDto2> test(Long... set) {
 		return typeRepo.findByTypeNoIn(set).stream()
 				.map(ProbTypeVo::parseDto2)
 				.collect(Collectors.toList());

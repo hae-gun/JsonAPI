@@ -2,8 +2,8 @@ com/example/vo/ProbTypeVo.java
  com.example.vo.ProbTypeVo
 com/example/service/JpaServices.java
  com.example.service.JpaServices
-com/example/service/BojnProbTypeService.java
- com.example.service.BojnProbTypeService
+com/example/service/ProbTypeService.java
+ com.example.service.ProbTypeService
 com/example/vo/QBojProbType.java
  com.example.vo.QBojProbType
 com/example/controller/Test.java
@@ -20,8 +20,8 @@ com/example/service/BojService.java
  com.example.service.BojService
 com/example/vo/QTestVo.java
  com.example.vo.QTestVo
-com/example/controller/TypeController.java
- com.example.controller.TypeController
+com/example/controller/BojAndTypeController.java
+ com.example.controller.BojAndTypeController
 com/example/repository/BojRepositorySupport.java
  com.example.repository.BojRepositorySupport
 com/example/vo/QBojVo.java
@@ -58,7 +58,7 @@ com/example/vo/TestVo.java
  com.example.vo.TestVo
 com/example/demo/H2ServerConfig.java
  com.example.demo.H2ServerConfig
-com/example/service/ProbTypeService.java
- com.example.service.ProbTypeService
-com/example/controller/BojAndTypeController.java
- com.example.controller.BojAndTypeController
+com/example/service/BojnProbTypeService.java
+ com.example.service.BojnProbTypeService
+com/example/controller/TypeController.java
+ com.example.controller.TypeController
