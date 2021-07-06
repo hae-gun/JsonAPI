@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.vo.BojVo;
+import com.example.vo.lombok.LombokVo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,11 +14,10 @@ import com.example.vo.TestVo;
 public class Test {
 	
 	@GetMapping("/vo")
-	public BojVo getMappingTest(){
-		BojVo vo = new BojVo();
-		vo.setId("123");
-		vo.setName("name");
-		vo.setLevel("level");
+	public LombokVo getMappingTest(){
+		LombokVo vo = LombokVo.builder()
+				.id(1L).name("test").build();
+
 		return vo;
 	}
 }
