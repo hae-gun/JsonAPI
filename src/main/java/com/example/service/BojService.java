@@ -45,13 +45,14 @@ public class BojService {
 	public JSONObject readJsonFile(String tier) throws FileNotFoundException, IOException, ParseException {
 		System.out.println("in ReadJsonFile");
 		String selectTier = tier.toLowerCase();
-		ClassPathResource resource = new ClassPathResource("/python/tier_" + selectTier + ".json");
-		System.out.println(resource.getURI());
-		 Path path = Paths.get(resource.getURI());
+//		ClassPathResource resource = new ClassPathResource("/python/tier_" + selectTier + ".json");
+//		System.out.println(resource.getURI());
+//		 Path path = Paths.get(resource.getURI());
 
-//		String source = "/home/chlgprms/JsonAPI/src/main/resources/python/tier_" + selectTier + ".json";
-//		System.out.println(source);
-		File file = new File(path.toUri());
+		String source = "/home/testgprms2/JsonAPI/src/main/resources/python/tier_" + selectTier + ".json";
+		System.out.println(source);
+//		File file = new File(path.toUri());
+		File file = new File(source);
 		return (JSONObject) parser.parse(new FileReader(file));
 	}
 
