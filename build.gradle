@@ -3,7 +3,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 	// querydsl
-	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
+//	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 	id 'war'
 	//id "com.ewerk.gradle.plugins.querydsl"
 }
@@ -37,9 +37,9 @@ dependencies {
    // compile ('org.springframework.boot:spring-boot-starter-security')
 	//compile fileTree(dir: 'resources', include: ['**/*.json'])
 	//queryDSL
-	implementation 'com.querydsl:querydsl-jpa:4.3.1'
-	implementation 'com.querydsl:querydsl-apt:4.3.1'
-	implementation 'com.querydsl:querydsl-core:4.3.1'
+//	implementation 'com.querydsl:querydsl-jpa:4.3.1'
+//	implementation 'com.querydsl:querydsl-apt:4.3.1'
+//	implementation 'com.querydsl:querydsl-core:4.3.1'
 	compileOnly("org.projectlombok:lombok:1.18.12")
 	annotationProcessor("org.projectlombok:lombok:1.18.12")
 
@@ -49,69 +49,69 @@ test {
 	useJUnitPlatform()
 }
 
-
-def queryDslDir = "src/main/generated"
-querydsl {
-    library = "com.querydsl:querydsl-apt:4.3.1" // 사용할 AnnotationProcesoor 정의
-    jpa = true
-    querydslSourcesDir = queryDslDir
-}
-sourceSets {
-    main {
-        java {
-            srcDir queryDslDir
-        }
-    }
-}
-
-compileQuerydsl {
-    options.annotationProcessorPath = configurations.querydsl
-}
-
-configurations {
-    /**
-     * 손권남님이 공유해주신 팁 
-     * 아래를 지정하지 않으면, compile 로 걸린 JPA 의존성에 접근하지 못한다.
-     */
-    querydsl.extendsFrom compileClasspath
-}
-//querydsl 추가 끝
-/** QueryDSL Class Generate Script */
-
-def generatedJavaSrcDir = 'src/main/generated'
-def queryDslOutput = file(generatedJavaSrcDir)
-
-sourceSets {
-    main {
-        java {
-            srcDirs = ['src/main/java', generatedJavaSrcDir]
-        }
-    }
-}
-
-/** QClass 생성 */
-/*
-task generateQueryDSL(type: JavaCompile, group: 'build') {
-    doFirst {
-        delete queryDslOutput
-        queryDslOutput.mkdirs()
-    }
-    
-    source = sourceSets.main.java
-    classpath = configurations.compile
-    destinationDir = queryDslOutput
-    options.compilerArgs = [
-            "-Xlint:unchecked"
-            //'-proc:only',
-            //'-processor',
-            //'com.querydsl.apt.JPAAnnotationProcessor' // 여기에 각 라이브러리에서 제공하는 annotation processor 를 선언해야함
-//            'com.querydsl.apt.hibernate.HibernateAnnotationProcessor' // Hibernate 사용시 해당 Processor 사용
-    ]
-}
-compileJava.dependsOn(generateQueryDSL)
-
-/** clean 태스크 실행시 QClass 삭제 */
-
-clean {
-    delete queryDslOutput
-}
+//
+//def queryDslDir = "src/main/generated"
+//querydsl {
+//    library = "com.querydsl:querydsl-apt:4.3.1" // 사용할 AnnotationProcesoor 정의
+//    jpa = true
+//    querydslSourcesDir = queryDslDir
+//}
+//sourceSets {
+//    main {
+//        java {
+//            srcDir queryDslDir
+//        }
+//    }
+//}
+//
+//compileQuerydsl {
+//    options.annotationProcessorPath = configurations.querydsl
+//}
+//
+//configurations {
+//    /**
+//     * 손권남님이 공유해주신 팁
+//     * 아래를 지정하지 않으면, compile 로 걸린 JPA 의존성에 접근하지 못한다.
+//     */
+//    querydsl.extendsFrom compileClasspath
+//}
+////querydsl 추가 끝
+///** QueryDSL Class Generate Script */
+//
+//def generatedJavaSrcDir = 'src/main/generated'
+//def queryDslOutput = file(generatedJavaSrcDir)
+//
+//sourceSets {
+//    main {
+//        java {
+//            srcDirs = ['src/main/java', generatedJavaSrcDir]
+//        }
+//    }
+//}
+//
+///** QClass 생성 */
+///*
+//task generateQueryDSL(type: JavaCompile, group: 'build') {
+//    doFirst {
+//        delete queryDslOutput
+//        queryDslOutput.mkdirs()
+//    }
+//
+//    source = sourceSets.main.java
+//    classpath = configurations.compile
+//    destinationDir = queryDslOutput
+//    options.compilerArgs = [
+//            "-Xlint:unchecked"
+//            //'-proc:only',
+//            //'-processor',
+//            //'com.querydsl.apt.JPAAnnotationProcessor' // 여기에 각 라이브러리에서 제공하는 annotation processor 를 선언해야함
+////            'com.querydsl.apt.hibernate.HibernateAnnotationProcessor' // Hibernate 사용시 해당 Processor 사용
+//    ]
+//}
+//compileJava.dependsOn(generateQueryDSL)
+//
+///** clean 태스크 실행시 QClass 삭제 */
+//
+//clean {
+//    delete queryDslOutput
+//}
