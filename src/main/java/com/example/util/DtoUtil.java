@@ -56,8 +56,8 @@ public class DtoUtil {
 	
 	public static JSONArray getJsonArray(String fullPath) throws FileNotFoundException, IOException, ParseException {
 		JSONParser parser = new JSONParser();
-		JSONObject object = DtoUtil.readJsonFile("/python/rearrange2.json");
-//		JSONObject object = DtoUtil.readJsonFile("/home/chlgprms/JsonAPI/src/main/resources/python/rearrange2.json");
+//		JSONObject object = DtoUtil.readJsonFile("/python/rearrange2.json");
+		JSONObject object = DtoUtil.readJsonFile("/home/chlgprms/JsonAPI/src/main/resources/python/rearrange2.json");
 		JSONObject tmp = (JSONObject)parser.parse(object.get("data").toString());
 		JSONArray arr = (JSONArray)parser.parse(tmp.get("0").toString());
 		return arr;
