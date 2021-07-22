@@ -41,7 +41,15 @@ public class BojService {
 		this.repository = repository;
 		this.otherRepo = otherRepo;
 	}
-
+	public JSONObject resetData() throws IOException, ParseException {
+		repository.deleteAll();
+		String[] tiers = {"bronze","silver","gold","platinum","diamond","ruby"};
+		for(String tier : tiers){
+			saveTierData(tier);
+		}
+		JSONObject result = new JSONObject();
+		return makeResultMsg(result);
+	}
 	public JSONObject readJsonFile(String tier) throws FileNotFoundException, IOException, ParseException {
 		System.out.println("in ReadJsonFile");
 		String selectTier = tier.toLowerCase();
@@ -91,10 +99,11 @@ public class BojService {
 		return repository.findAll();
 	}
 
-	private void makeResultMsg(JSONObject result) {
+	private JSONObject makeResultMsg(JSONObject result) {
 		result.put("code", "0000");
 		result.put("action", "saveTierData");
 		result.put("msg", "complete");
+		return result;
 	}
 
 	public List<BojDto> searchByName(String name) {

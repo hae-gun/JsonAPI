@@ -32,6 +32,11 @@ public class JsonController {
 		return bojService.test();
 	}
 
+	@PostMapping("/update")
+	public JSONObject updateProbs() throws IOException, ParseException {
+		return bojService.resetData();
+	}
+
 	@GetMapping("/probs/{tier}")
 	public JSONObject testBoj(@PathVariable String tier) throws FileNotFoundException, IOException, ParseException {
 		return bojService.getJsonData(tier);
@@ -52,10 +57,12 @@ public class JsonController {
 	public List<BojDto> searchByName(@PathVariable String name){
 		return bojService.searchByName(name);
 	}
+
 	@GetMapping("/random/{tier}")
 	public List<BojDto> getRandomProb(@PathVariable String tier){
 		return bojService.randomProb(tier,0);
 	}
+
 	@GetMapping("/random/{tier}/{level}")
 	public List<BojDto> getRandomProb(@PathVariable String tier,@PathVariable int level){
 		return bojService.randomProb(tier,level);
