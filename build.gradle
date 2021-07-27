@@ -5,7 +5,7 @@ plugins {
 	// querydsl
 //	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 	id 'war'
-	//id "com.ewerk.gradle.plugins.querydsl"
+//	id "com.ewerk.gradle.plugins.querydsl"
 }
 
 group = 'com.example'

@@ -1,4 +1,4 @@
-package com.example.vo;
+package com.example.demo.vo;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
