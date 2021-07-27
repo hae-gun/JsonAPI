@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cache.annotation.EnableCaching;
 @EnableCaching
 @SpringBootApplication
-@EntityScan(basePackages = "com.example.vo")
+@EntityScan(basePackages = "com.example.demo.vo")
 public class JsonApiApplication {
 
 	public static void main(String[] args) {

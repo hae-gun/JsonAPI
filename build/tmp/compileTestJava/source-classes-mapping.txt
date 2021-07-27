@@ -1,2 +1,2 @@
-com/example/service/BojnProbTypeServiceTest.java
- com.example.service.BojnProbTypeServiceTest
+com/example/demo/service/BojnProbTypeServiceTest.java
+ com.example.demo.service.BojnProbTypeServiceTest

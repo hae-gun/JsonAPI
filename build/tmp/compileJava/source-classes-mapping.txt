@@ -1,67 +1,65 @@
-com/example/vo/ProbTypeVo.java
- com.example.vo.ProbTypeVo
-com/example/service/JpaServices.java
- com.example.service.JpaServices
-com/example/service/BojnProbTypeService.java
- com.example.service.BojnProbTypeService
-com/example/vo/QBojProbType.java
- com.example.vo.QBojProbType
-com/example/vo/BojVo.java
- com.example.vo.BojVo
-com/example/vo/QProbTypeVo.java
- com.example.vo.QProbTypeVo
-com/example/vo/ProbTypeDto.java
- com.example.vo.ProbTypeDto
-com/example/repository/BojRepositorySupportImpl.java
- com.example.repository.BojRepositorySupportImpl
+com/example/demo/repository/BojRepository.java
+ com.example.demo.repository.BojRepository
+com/example/demo/vo/BojProbType.java
+ com.example.demo.vo.BojProbType
+com/example/demo/repository/ProbTypeRepository.java
+ com.example.demo.repository.ProbTypeRepository
+com/example/demo/service/JpaServices.java
+ com.example.demo.service.JpaServices
+com/example/demo/service/BojService.java
+ com.example.demo.service.BojService
+com/example/demo/controller/Test.java
+ com.example.demo.controller.Test
+com/example/demo/repository/BojRepositorySupport.java
+ com.example.demo.repository.BojRepositorySupport
+com/example/demo/repository/TestRepository.java
+ com.example.demo.repository.TestRepository
+com/example/demo/controller/TypeController.java
+ com.example.demo.controller.TypeController
 com/example/demo/DataSourceConfiguration.java
  com.example.demo.DataSourceConfiguration
-com/example/service/BojService.java
- com.example.service.BojService
-com/example/vo/QTestVo.java
- com.example.vo.QTestVo
-com/example/controller/TypeController.java
- com.example.controller.TypeController
-com/example/repository/BojRepositorySupport.java
- com.example.repository.BojRepositorySupport
-com/example/vo/QBojVo.java
- com.example.vo.QBojVo
-com/example/repository/ProbTypeRepository.java
- com.example.repository.ProbTypeRepository
-com/example/controller/BojAndTypeController.java
- com.example.controller.BojAndTypeController
-com/example/vo/BojProbType.java
- com.example.vo.BojProbType
-com/example/controller/JsonController.java
- com.example.controller.JsonController
-com/example/repository/BojRepository.java
- com.example.repository.BojRepository
-com/example/demo/H2ServerConfig.java
- com.example.demo.H2ServerConfig
-com/example/repository/BojProbTypeRepository.java
- com.example.repository.BojProbTypeRepository
-com/example/repository/TestRepository.java
- com.example.repository.TestRepository
-com/example/util/DtoUtil.java
- com.example.util.DtoUtil
-com/example/vo/Account.java
- com.example.vo.Account
-com/example/vo/ProbTypeDto2.java
- com.example.vo.ProbTypeDto2
+com/example/demo/vo/ProbTypeDto.java
+ com.example.demo.vo.ProbTypeDto
+com/example/demo/service/ProbTypeService.java
+ com.example.demo.service.ProbTypeService
+com/example/demo/util/DtoUtil.java
+ com.example.demo.util.DtoUtil
+com/refactor/quiz/Quiz.java
+ com.refactor.quiz.Quiz
+com/example/demo/vo/BojVo.java
+ com.example.demo.vo.BojVo
+com/example/demo/repository/BojRepositorySupportImpl.java
+ com.example.demo.repository.BojRepositorySupportImpl
+com/example/demo/vo/BojDto.java
+ com.example.demo.vo.BojDto
+com/refactor/quizandtype/QuizAndType.java
+ com.refactor.quizandtype.QuizAndType
+com/example/demo/vo/ProbTypeVo.java
+ com.example.demo.vo.ProbTypeVo
+com/example/demo/vo/InputDto.java
+ com.example.demo.vo.InputDto
+com/example/demo/vo/lombok/LombokVo.java
+ com.example.demo.vo.lombok.LombokVo
+ com.example.demo.vo.lombok.LombokVo$LombokVoBuilder
+com/example/demo/vo/TestVo.java
+ com.example.demo.vo.TestVo
+com/example/demo/vo/ProbTypeDto2.java
+ com.example.demo.vo.ProbTypeDto2
+com/example/demo/controller/BojAndTypeController.java
+ com.example.demo.controller.BojAndTypeController
+com/example/demo/repository/BojProbTypeRepository.java
+ com.example.demo.repository.BojProbTypeRepository
 com/example/demo/SpringBootConfiguration.java
  com.example.demo.SpringBootConfiguration
-com/example/vo/BojDto.java
- com.example.vo.BojDto
-com/example/vo/InputDto.java
- com.example.vo.InputDto
 com/example/demo/JsonApiApplication.java
  com.example.demo.JsonApiApplication
-com/example/vo/TestVo.java
- com.example.vo.TestVo
-com/example/service/ProbTypeService.java
- com.example.service.ProbTypeService
-com/example/vo/lombok/LombokVo.java
- com.example.vo.lombok.LombokVo
- com.example.vo.lombok.LombokVo$LombokVoBuilder
-com/example/controller/Test.java
- com.example.controller.Test
+com/example/demo/vo/Account.java
+ com.example.demo.vo.Account
+com/refactor/type/Type.java
+ com.refactor.type.Type
+com/example/demo/controller/JsonController.java
+ com.example.demo.controller.JsonController
+com/example/demo/service/BojnProbTypeService.java
+ com.example.demo.service.BojnProbTypeService
+com/example/demo/H2ServerConfig.java
+ com.example.demo.H2ServerConfig

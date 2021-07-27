@@ -15,9 +15,9 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 
 @Configuration
 @ComponentScan(basePackages = "com.example") 
-@PropertySource("classpath:/application.properties")
-@EnableJpaRepositories(basePackages = "com.example.repository")
-//@EntityScan(basePackages = "com.example.vo") // Entity 가 not a managed type 인 이유 -> Entity scan을 하지 않았기 때문이다.
+@PropertySource("classpath:/application.yaml")
+@EnableJpaRepositories(basePackages = "com.example.demo.repository")
+//@EntityScan(basePackages = "com.example.demo.vo") // Entity 가 not a managed type 인 이유 -> Entity scan을 하지 않았기 때문이다.
 public class SpringBootConfiguration {
 	 
 	@PersistenceContext
