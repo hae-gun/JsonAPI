@@ -28,12 +28,12 @@
 
 * 메뉴
 
-  <img src="README.assets/image-20210822230958644.png" alt="image-20210822230958644" style="zoom:33%;" />
+  <img src="README.assets/image-20210822230958644.png" alt="image-20210822230958644" width="50" height="50" />
 
 * 사용 예시1
 
-  <img src="README.assets/image-20210822231135942.png" alt="image-20210822231135942" style="zoom: 33%;" />
+  <img src="README.assets/image-20210822231135942.png" alt="image-20210822231135942" width="50" height="50" />
 
 * 사용 예시 2
 
-  <img src="README.assets/image-20210822231226267.png" alt="image-20210822231226267" style="zoom: 33%;" />
+  <img src="README.assets/image-20210822231226267.png" alt="image-20210822231226267" width="50" height="50" />
