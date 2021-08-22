@@ -36,4 +36,4 @@
 
   * 사용 예시 2
 
-<img src="README.assets/image-20210822231226267.png" alt="image-20210822231226267" style="zoom:50%;" />
+    <img src="README.assets/image-20210822231226267.png" alt="image-20210822231226267" style="zoom:50%;" />
